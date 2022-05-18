@@ -3,14 +3,20 @@
 </template>
 
 <script>
-import BuilderStage from './components/BuilderStage.vue'
+import BuilderStage from "./components/BuilderStage.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    BuilderStage
-}
-}
+    BuilderStage,
+  },
+  data() {
+    return {
+      draggable: true,
+    };
+  },
+  methods: {},
+};
 </script>
 
 <style lang="scss">
@@ -21,5 +27,10 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.container {
+  max-width: 920px;
+  margin: auto;
 }
 </style>
