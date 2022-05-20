@@ -1,21 +1,18 @@
 <template>
   <div id="builder-stage-container">
-    <div class="box box-1"></div>
-    <div class="box box-2"></div>
-    <FreeTransfromTool></FreeTransfromTool>
-    <div id="content-element" class="content-element">
-      Lorem ipsum dolor sit amet hehe
-    </div>
+    <FreeTransfromTool v-for="element in elements" :key="element.vid" :element="element"></FreeTransfromTool>
+    <PageContentElement v-for="element in elements" :key="element.vid" :element="element"></PageContentElement>
   </div>
 </template>
 
 <script>
 import FreeTransfromTool from './FreeTransfromTool.vue';
+import PageContentElement from './PageContentElement.vue';
 
 
 export default {
     name: "BuilderStage",
-    components: { FreeTransfromTool },
+    components: { FreeTransfromTool, PageContentElement },
     props: ["elements"]
 };
 </script>

@@ -1,5 +1,10 @@
 <template>
-  <div class="free-transform-tool"></div>
+  <div 
+    class="free-transform-tool"
+    v-bind:style="[element.styles]"
+  >
+
+  </div>
 </template>
 
 <script>
@@ -7,9 +12,10 @@ import Moveable from "moveable";
 
 export default {
   name: "FreeTransfromTool",
+  props: ["element"],
   mounted: function () {
     const moveable = new Moveable(document.body, {
-      target: document.querySelectorAll(".free-transform-tool"),
+      target: this.$el,
       // If the container is null, the position is fixed. (default: parentElement(document.body))
       container: document.body,
       draggable: true,
@@ -23,10 +29,7 @@ export default {
       horizontalGuidelines: [0, 200, 400],
       snapThreshold: 5,
       isDisplaySnapDigit: true,
-      elementGuidelines: [
-        document.querySelector(".box-1"),
-        document.querySelector(".box-2"),
-      ],
+      elementGuidelines: this.getElements,
       snapGap: true,
       snapDirections: { top: true, right: true, bottom: true, left: true },
       elementSnapDirections: {
@@ -71,11 +74,27 @@ export default {
           clientX,
           clientY,
         }) => {
+          let $element = document.getElementById(this.element.key);
+
           target.style.left = `${left}px`;
           target.style.top = `${top}px`;
-          document.getElementById("content-element").style.left = `${left}px`;
-          document.getElementById("content-element").style.top = `${top}px`;
-          console.log("onDrag translate", dist);
+
+          // $(`#${this.element.key}`).css({
+          //   top: `${top}px`,
+          //   left: `${left}px`,
+          // });
+
+          // console.log(document.getElementById(element.key).style);
+
+          // document.getElementById(element.key).style = {
+          //   ...document.getElementById(element.key).style,
+          //   left: `${left}px`,
+          //   top: `${top}px`
+          // }
+
+          $element.style.left = `${left}px`;
+          $element.style.top = `${top}px`;
+          // console.log("onDrag translate", dist);
         }
       )
       .on("dragEnd", ({ target, isDrag, clientX, clientY }) => {
@@ -90,10 +109,10 @@ export default {
       .on("resizeStart", (e) => {
         e.setOrigin(["%", "%"]);
         e.dragStart && e.dragStart.set(frame.translate);
-        console.log(e);
+        // console.log(e);
       })
       .on("resize", (e) => {
-        console.log(e);
+        // console.log(e);
         const beforeTranslate = e.drag.beforeTranslate;
 
         // console.log(beforeTranslate);
@@ -103,12 +122,12 @@ export default {
         e.target.style.height = `${e.height}px`;
         e.target.style.transform = e.drag.transform;
 
-        document.getElementById("content-element").style.width = `${e.width}px`;
-        document.getElementById(
-          "content-element"
-        ).style.height = `${e.height}px`;
-        document.getElementById("content-element").style.transform =
-          e.drag.transform;
+        // document.getElementById("content-element").style.width = `${e.width}px`;
+        // document.getElementById(
+        //   "content-element"
+        // ).style.height = `${e.height}px`;
+        // document.getElementById("content-element").style.transform =
+        //   e.drag.transform;
       })
       .on("resizeEnd", (e) => {
         //   console.log(e);
@@ -118,21 +137,28 @@ export default {
     moveable
       .on("rotateStart", ({ target, clientX, clientY }) => {
         // console.log("onRotateStart", target);
-        console.log(target);
+        // console.log(target);
       })
       .on(
         "rotate",
         ({ target, beforeDelta, delta, dist, transform, clientX, clientY }) => {
           //   console.log("onRotate", dist);
           target.style.transform = transform;
-          document.getElementById("content-element").style.transform =
-            transform;
+          // document.getElementById("content-element").style.transform =
+          //   transform;
         }
       )
       .on("rotateEnd", ({ target, isDrag, clientX, clientY }) => {
         // console.log("onRotateEnd", target, isDrag);
       });
   },
+  computed: {
+    getElements() {
+     return this.$parent.elements.map((element) => {
+       return document.querySelector(`#${element.key}`)
+     })
+    }
+  }
 };
 </script>
 
@@ -142,7 +168,5 @@ export default {
 .free-transform-tool {
   position: absolute;
   z-index: 1;
-  width: 150px;
-  height: 50px;
 }
 </style>
