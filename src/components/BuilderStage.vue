@@ -23,7 +23,7 @@ export default {
   width: 756px;
   height: 370px;
   margin: auto;
-  border: 1px solid #ddd;
+  border: 1px solid #000;
 }
 
 .box {
