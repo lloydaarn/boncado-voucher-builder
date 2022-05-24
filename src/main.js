@@ -8,7 +8,7 @@ import store from './store'
 
 createApp(App).use(store).mount('#app')
 
-let installButton = document.createElement('button');
+let installButton = document.querySelector("#installButton");
 
 let prompt;
 window.addEventListener('beforeinstallprompt', function(e){
@@ -20,6 +20,7 @@ window.addEventListener('beforeinstallprompt', function(e){
 });
 
 installButton.addEventListener('click', function(){
+    alert("prompt");
    prompt.prompt();
 })
 
