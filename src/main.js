@@ -12,17 +12,11 @@ let installButton = document.querySelector("#installButton");
 
 let prompt;
 window.addEventListener('beforeinstallprompt', function(e){
-  alert("beforeInstall");
   // Prevent the mini-infobar from appearing on mobile
   e.preventDefault();
   // Stash the event so it can be triggered later.
   prompt = e;
 });
-
-installButton.addEventListener('click', function(){
-    alert("prompt");
-   prompt.prompt();
-})
 
 let installed = false;
 installButton.addEventListener('click', async function(){
