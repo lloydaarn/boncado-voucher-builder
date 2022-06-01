@@ -1,6 +1,5 @@
 <template>
   <BuilderStage :elements="elements"></BuilderStage>
-  <button id="installButton">Install Button</button>  
 </template>
 
 <script>
