@@ -1,5 +1,6 @@
 <template>
   <BuilderStage :elements="elements"></BuilderStage>
+  
 </template>
 
 <script>

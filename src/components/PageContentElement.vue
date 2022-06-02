@@ -14,6 +14,10 @@ export default {
   data() {
     return {};
   },
+  methods: {
+  },
+  mounted: function () {
+  },
 };
 </script>
 
@@ -22,7 +26,7 @@ export default {
   position: absolute;
 
   .content-editable {
-      line-height: 1.42857143;
+    line-height: 1.42857143;
   }
 
   p {
