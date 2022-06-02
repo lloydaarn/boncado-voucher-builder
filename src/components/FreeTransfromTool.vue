@@ -14,16 +14,16 @@ export default {
   name: "FreeTransfromTool",
   props: ["element"],
   mounted: function () {
-    const moveable = new Moveable(document.body, {
+    const moveable = new Moveable(document.getElementById("builder-stage"), {
       target: this.$el,
       // If the container is null, the position is fixed. (default: parentElement(document.body))
-      container: document.body,
+      container: document.getElementById("builder-stage"),
       draggable: true,
       resizable: true,
       rotatable: true,
       warpable: true,
       snappable: true,
-      snapContainer: document.getElementById("builder-stage-container"),
+      snapContainer: document.getElementById("builder-stage"),
       className: "moveable-free-transform-tool",
       verticalGuidelines: [0, 200, 400],
       horizontalGuidelines: [0, 200, 400],

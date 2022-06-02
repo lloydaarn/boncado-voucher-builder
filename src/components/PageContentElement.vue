@@ -17,6 +17,13 @@ export default {
   methods: {
   },
   mounted: function () {
+    if (this.element.type == "text") {
+      console.log(this.$el.querySelector(".content-editable"));
+      tinymce.init({
+        target: this.$el.querySelector(".content-editable"),
+        inline: true,
+      })
+    }
   },
 };
 </script>
